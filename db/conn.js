@@ -1,25 +1,49 @@
+import { MongoClient } from "mongodb";
 
-// import { MongoClient } from "mongodb";
-import mongoose from "mongoose";
+const connectionString = process.env.ATLAS_URI || "";
 
-// const client = new MongoClient(process.env.ATLAS_URI);
-
-// let conn;
-// try {
-//   conn = await client.connect();
-// } catch (e) {
-//   console.error(e);
-// }
-
-// let db = conn.db("sample_training");
+const client = new MongoClient(connectionString);
 
 
 
-export async function conn() {
-    try {
-        await mongoose.connect(process.env.ATLAS_URI);
-        console.log('Connected to MongoDB');
-    } catch (e) {
-        console.log(`Error Connecting to MongoDB: ${e}`);
-    }
+// async function conn() {
+//         try {
+//             await mongoose.connect(process.env.ATLAS_URI);
+//             console.log('Connected to MongoDB');
+//         } catch (e) {
+//             console.log(`Error Connecting to MongoDB: ${e}`);
+//         }
+//     }
+
+
+let conn;
+try {
+  conn = await client.connect();
+  console.log("Connected to MongoDB");
+} catch (e) {
+  console.error(e);
+  console.log(`Didn't connect to MongoDB because: ${e}`);
 }
+
+let db = conn.db("sample_training");
+
+export default { conn, db };
+
+
+
+
+
+
+
+//this is the one that is working 
+
+// export async function conn() {
+//     try {
+//         await mongoose.connect(process.env.ATLAS_URI);
+//         console.log('Connected to MongoDB');
+//     } catch (e) {
+//         console.log(`Error Connecting to MongoDB: ${e}`);
+//     }
+// }
+// the one on top is working 
+

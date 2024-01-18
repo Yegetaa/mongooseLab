@@ -3,8 +3,11 @@ import express from "express";
 
 import "./loadEnv.js";
 import grades from "./routes/grades.js";
-import { conn } from "./db/conn.js"; conn();
 
+
+
+// import { conn, db } from "./db/conn.js";import mongoose from "mongoose";
+// conn();
 
 const app = express();
 const PORT = process.env.PORT || 5050;
