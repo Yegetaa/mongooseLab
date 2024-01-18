@@ -1,12 +1,17 @@
 import express from "express";
+
+
 import "./loadEnv.js";
 import grades from "./routes/grades.js";
+import { conn } from "./db/conn.js"; conn();
+
 
 const app = express();
 const PORT = process.env.PORT || 5050;
 
 
 app.use(express.json());
+// app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.send("Welcome to the API.");
